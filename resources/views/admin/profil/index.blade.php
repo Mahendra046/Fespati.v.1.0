@@ -12,7 +12,7 @@
                         <div class="modal fade" id="basicModal">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <form action="{{ url('admin/profil') }}" method="post">
+                                    <form action="{{ url('admin/profil') }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-header" style="background: #3b4268">
                                             <h5 class="modal-title text-white">Tambah Data Profil Fespati</h5>
@@ -31,9 +31,15 @@
                                                     <option value="Periode">Periode Kepengurusan</option>
                                                 </select>
                                             </div>
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="" class="control-label">Foto</label>
+                                                    <input type="file" name="foto" class="form-control">
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label for="" class="control-label">Isi</label>
-                                                <textarea name="isi" id="" class="form-control" placeholder="isi"></textarea>
+                                                <textarea name="isi" id="" class="summernote" placeholder="isi"></textarea>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -57,6 +63,7 @@
                                         <th>Aksi</th>
                                         <th>Jenis</th>
                                         <th>Isi</th>
+                                        <th>Atribut</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,13 +79,14 @@
                                                 </div>
                                             </td>
                                             <td>{{$profil->jenis}}</td>
-                                            <td>{{$profil->isi}}</td>
+                                            <td>{!!nl2br ($profil->isi)!!}</td>
+                                            <td><img src="{{url("public/$profil->foto")}}" style="width:200px;" alt=""></td>
                                         </tr>
                                         {{-- Modal Edit Start--}}
                                         <div class="modal fade" id="edit{{$profil->id}}">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
-                                                    <form action="{{ url('admin/profil', $profil->id) }}" method="post">
+                                                    <form action="{{ url('admin/profil', $profil->id) }}" method="post" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('put')
                                                         <div class="modal-header" style="background: #3b4268">
@@ -96,12 +104,19 @@
                                                                     <option value="Sejarah">Sejarah</option>
                                                                     <option value="Visi">Visi</option>
                                                                     <option value="Misi">Misi</option>
-                                                                    <option value="Periode">Periode Kepengurusan</option>
+                                                                    <option value="Proker">Proker</option>
                                                                 </select>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="" class="control-label">Foto</label>
+                                                                    <input type="file" name="foto" class="form-control" value="{{url('public',$profil->foto)}}">
+                                                                    <img src="{{url("public/$profil->foto")}}" class="img-fluid rounded" alt="">
+                                                                </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="" class="control-label">Isi</label>
-                                                                <textarea name="isi" id="" class="form-control" placeholder="isi">{{$profil->isi}}</textarea>
+                                                                <textarea name="isi" id="" class="summernote" placeholder="isi">{!!nl2br ($profil->isi) !!}</textarea>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">

@@ -22,8 +22,8 @@
                         <i class="ti-pie-chart text-success"></i>
                     </div>
                     <div class="stat-content d-inline-block">
-                        <div class="stat-text">Bagian</div>
-                        <div class="stat-digit">{{$list_divisi->count()}}</div>
+                        <div class="stat-text">Club</div>
+                        <div class="stat-digit"></div>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="stat-content d-inline-block">
                         <div class="stat-text">Anggota</div>
-                        <div class="stat-digit">{{$list_anggota->count()}}</div>
+                        <div class="stat-digit"></div>
                     </div>
                 </div>
             </div>

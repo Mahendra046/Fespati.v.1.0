@@ -15,21 +15,20 @@
 <body>
     <div class="container-fluid h-100">
         <div class="row justify-content-center h-100 align-items-center">
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="authincation-content">
                     <div class="row no-gutters">
                         <div class="col-xl-12">
                             <div class="auth-form">
-                                <a href="index.html" class="brand-logo mb-4"
-                                    style="display:flex; justify-content:center;">
-                                    <img src="{{ url('public/focus') }}/images/FESPATI KETAPANG.png"
-                                        style="max-width:30px; margin-right:4px;">
-                                    <img src="{{ url('public/focus') }}/images/fespatifontblack.png" alt=""
-                                        style="max-width:200px">
-                                </a>
-                                <h4 class="text-center mb-4"><span>Masuk Ke Halaman Admin</span></h4>
-                                <x-Layout.utils.notif />
-                                <form action="{{ url('login') }}" method="post">
+                                <a href="{{url('beranda')}}" class="brand-logo mb-4"
+                                style="display:flex; justify-content:center;">
+                                <img src="{{ url('public/focus') }}/images/FESPATI KETAPANG.png"
+                                style="max-width:30px; margin-right:4px;">
+                                <img src="{{ url('public/focus') }}/images/fespatifontblack.png" alt=""
+                                style="max-width:200px">
+                            </a>
+                            <x-Layout.utils.notif />
+                            <form action="{{ url('login') }}" method="post">
                                     @csrf
                                     <div class="form-group">
                                         <label><strong>Email</strong></label>
@@ -41,15 +40,19 @@
                                             placeholder="Password">
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                        <button type="submit" class="btn btn-block text-white" style="background: #258f99;">Log Masuk</button>
                                     </div>
                                 </form>
+                                <div class="new-account mt-3">
+                                    <p>Tidak Memiliki Akun? <a class="" href="{{url('register')}}" style="color:#258f99;">Daftar Sekarang</a></p>
+                                </div>
+                                <div class="card-footer text-center py-3">
+                                    <div class="small"><a
+                                            href="https://wa.me/62895372200063?text=Halo%20Admin%20saya%20lupa%20password,%20bisakah%20saya%20minta%20reset%20Password%20dengan%20email">Lupa
+                                            Password? Hubungi Admin</a></div>
+                                </div>
                             </div>
-                            <div class="card-footer text-center py-3">
-                                <div class="small"><a
-                                        href="https://wa.me/62895372200063?text=Halo%20Admin%20saya%20lupa%20password,%20bisakah%20saya%20minta%20reset%20Password%20dengan%20email">Lupa
-                                        Password? Hubungi Admin</a></div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -64,7 +67,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: url('../cloning2/public/focus/images/login2.jpg');
+            background: url('../fespati/public/focus/images/login2.jpg');
         }
     </style>
 

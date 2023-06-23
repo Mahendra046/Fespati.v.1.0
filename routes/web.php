@@ -1,22 +1,28 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Admin\AnggotaController;
-use App\Http\Controllers\Admin\DivisiController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\StrukturController;
+use App\Http\Controllers\Admin\Register\RegisterKTAController;
+use App\Http\Controllers\Admin\Master_data\AnggotaController;
+use App\Http\Controllers\Admin\Master_data\AdminController;
+use App\Http\Controllers\Admin\Master_data\ClubController;
+use App\Http\Controllers\Admin\Master_data\KetuaController;
 use App\Http\Controllers\Depan\HomeController;
-use App\Http\Controllers\Depan\BeritawebController;
-use App\Http\Controllers\Depan\EventwebController;
+use App\Http\Controllers\Depan\RegistrasiwebController;
+use App\Http\Controllers\Depan\Informasi\BeritawebController;
+use App\Http\Controllers\Depan\Informasi\EventwebController;
 use App\Http\Controllers\Depan\Tentang\SejarahwebController;
 use App\Http\Controllers\Depan\Tentang\StrukturwebController;
 use App\Http\Controllers\Depan\Tentang\VisimisiwebController;
+use App\Http\Controllers\Depan\KontakController;
 use App\Http\Controllers\Depan\Media\FotowebController;
-use App\Http\Controllers\Depan\Media\VideowebController;
+use App\Http\Controllers\Ketua\ClubKetuaController;
+use App\Models\MasterData\KetuaClub;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -35,24 +41,17 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'loginProcess']);
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
 // Admin
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
     // dashboard
     Route::get('dashboard', [DashboardController::class, 'index']);
-    // profil
-    Route::get('divisi', [DivisiController::class, 'index']);
-    Route::post('divisi', [DivisiController::class, 'store']);
-    Route::get('divisi/{divisi}', [DivisiController::class, 'show']);
-    Route::put('divisi/{divisi}', [DivisiController::class, 'update']);
-    Route::get('divisi/infoanggota/{dataAnggota}', [DivisiController::class, 'infoanggota']);
-    Route::delete('divisi/deleteanggotaall/{list_detail}', [DivisiController::class, 'deleteanggotaall']);
-    Route::delete('divisi/deleteanggota/{dataAnggota}', [DivisiController::class, 'deleteanggota']);
-    Route::delete('divisi/{divisi}', [DivisiController::class, 'delete']);
-
-    // data anggota start
-    Route::delete('anggota/{anggota}', [AnggotaController::class, 'delete']);
-    Route::put('anggota/{anggota}', [AnggotaController::class, 'update']);
-    Route::resource('anggota', AnggotaController::class);
+    // Unduhan
+    Route::delete('RegisterKTA/{dokumen}',[RegisterKTAController::class,'destroy']);
+    Route::put('RegisterKTA/{dokumen}',[RegisterKTAController::class, 'update']);
+    Route::resource('RegisterKTA', RegisterKTAController::class);
+    // Struktur Organisasi
+    Route::resource('struktur', StrukturController::class);
     // data berita start
     Route::delete('berita/{berita}', [BeritaController::class, 'delete']);
     Route::put('berita/{berita}', [BeritaController::class, 'update']);
@@ -63,20 +62,36 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::resource('galeri', GaleriController::class);
     // data Galeri start
     Route::resource('profil', ProfilController::class);
-
     // data Admin Start
     Route::resource('admin', AdminController::class);
+    // club
+    Route::resource('club', ClubController::class);
+    // Anggota
+    Route::get('anggota', [AnggotaController::class,'indexAnggota']);
+    // Ketua
+    Route::put('ketua_club/{ketua}', [KetuaController::class,'update']);
+    Route::delete('ketua_club/{ketua}', [KetuaController::class,'destroy']);
+    Route::resource('ketua_club', KetuaController::class);
+    // Anggota
+    Route::put('anggota/{anggota}', [AnggotaController::class, 'update']);
+    Route::resource('anggota', AnggotaController::class);
 });
 
-Route::get('/', [HomeController::class, 'index']);
+Route::prefix('ketua')->middleware('auth:ketua')->group(function () {
+    Route::get('profil', [DashboardController::class, 'profil']);
+    Route::get('dashboard', [DashboardController::class, 'dashboardKetua']);
+    Route::resource('anggota', ClubKetuaController::class);
+});
 
 // Tampilan Depan
+Route::get('/', [HomeController::class, 'index']);
 // beranda
 Route::get('beranda', [HomeController::class, 'index']);
 // galeri
-Route::get('foto', [HomeController::class, 'galeri']);
+Route::get('foto', [FotowebController::class, 'galeri']);
 // berita
 Route::get('berita', [BeritawebController::class, 'berita']);
+Route::get('beritaall', [BeritawebController::class, 'beritaall']);
 Route::get('berita/detail/{berita}', [BeritawebController::class, 'beritadetail']);
 // Event
 Route::get('event', [EventwebController::class, 'event']);
@@ -86,3 +101,7 @@ Route::get('sejarah', [SejarahwebController::class, 'sejarah']);
 Route::get('visi_misi', [VisimisiwebController::class, 'visi_misi']);
 // Struktur Pengurus
 Route::get('struktur_organisasi', [StrukturwebController::class, 'struktur_organisasi']);
+// Kontak
+Route::get('kontak', [KontakController::class, 'kontak']);
+// registerKTA
+Route::get('register', [RegistrasiwebController::class,'informasi']);

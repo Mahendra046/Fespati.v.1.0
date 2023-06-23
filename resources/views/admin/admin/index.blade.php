@@ -1,4 +1,4 @@
-<x-app>
+<x-app title="Admin | Master Data">
     <div class="container-fluid">
 
 
@@ -110,7 +110,7 @@
                                         <div class="modal fade" id="edit{{ $admin->id }}">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
-                                                    <form action="{{ url('admin', $admin->id) }}" method="post"
+                                                    <form action="{{ url('admin/admin', $admin->id) }}" method="post"
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         @method('put')
@@ -129,17 +129,21 @@
                                                                     class="form-control" value="{{ $admin->nama }}">
                                                             </div>
                                                             <div class="form-group">
+                                                                <label for="" class="control-label"></label>
+                                                                <input type="text" name="no_hp" class="form-control" value="{{$admin->no_hp}}">
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for=""
                                                                     class="control-label">Email</label>
                                                                 <input type="text" name="email"
                                                                     class="form-control" value="{{ $admin->email }}">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label for=""
-                                                                    class="control-label">Password</label>
-                                                                <input type="password" name="password"
-                                                                    class="form-control"
-                                                                    value="{{ url('public', $admin->password) }}">
+                                                                <label for="" class="control-label">Level</label>
+                                                                <select name="level" class="form-control" id="">
+                                                                    <option value="operasional">operasional</option>
+                                                                    <option value="umum">umum</option>
+                                                                </select>
                                                             </div>
 
                                                         </div>

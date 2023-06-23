@@ -4,17 +4,12 @@ namespace App\Http\Controllers\Depan\Tentang;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Profil;
-use App\Models\Divisi;
-use App\Models\Anggota;
+use App\Models\Struktur;
 
 class StrukturwebController extends Controller
 {
     function struktur_organisasi() {
-        $data['periode'] = Profil::where('jenis','Periode')->get();
-
-        $data['list_divisi'] = Divisi::with('anggota')->get();
-        $data['list_anggota'] = Anggota::all();
+        $data['struktur'] = Struktur::all();
         return view('depan.tentang.struktur_organisasi',$data);
     }
 }

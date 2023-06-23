@@ -2,8 +2,8 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs d-flex align-items-center"
         style="background-image: url('public/Up/assets/img/berita/background4.jpg');">
-        <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
-
+        <div class="container position-relative d-flex flex-column" data-aos="fade">
+            <h2>Struktur Pengurus</h2>
             <ol>
                 <li><a href="{{ url('beranda') }}">Beranda</a></li>
                 <li>Pengurus Fespati Cabang</li>
@@ -18,56 +18,20 @@
             <div class="row">
                 <div class="container">
                     <div class="service-item  position-relative">
-                        <h5 class="text-center">
-                            SUSUNAN PENGURUS CABANG
-                        </h5>
-                        <h5 class="text-center">FESPATI KABUPATEN KETAPANG PROVINSI KALIMANTAN BARAT</h5>
-                        @foreach ($periode as $periode)
-                            <h5 class="text-center">{{ $periode->isi }}</h5>
-                        @endforeach
-                        <br>
-                        <br>
-                        <table class="table table-striped" style="justify-content: center">
-                            <thead>
-                                <tr>
-                                    <th scope="">NAMA JABATAN</th>
-                                    <th scope="">:</th>
-                                    <th scope=""></th>
-                                    <th scope="">NAMA PERSONALIA</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($list_divisi as $divisi)
-                                    <tr>
-                                        <td class="col-lg-3">{{ $divisi->nama_divisi }}</td>
-                                        <td>:</td>
-                                        <td>
-                                            @foreach ($list_anggota as $anggota)
-                                                @if ($anggota->id_divisi == $divisi->id)
-                                                    <ul>
-                                                        {{ $anggota->jabatan }}
-                                                    </ul>
-                                                @endif
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach ($list_anggota as $anggota)
-                                                @if ($anggota->id_divisi == $divisi->id)
-                                                    <ul>
-                                                        {{ $anggota->nama }}
-                                                    </ul>
-                                                @endif
-                                            @endforeach
-                                        </td>
+                        <di class="row position-relative">
+
+                            @foreach ($struktur as $struktur)
+
+                                    <img src="{{ url("public/$struktur->foto") }}" style="width:100%;" alt="">
 
 
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                            @endforeach
+                        </div>
+
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 </x-depan>

@@ -78,7 +78,6 @@
                                                                 data-dismiss="modal"><span>&times;</span>
                                                             </button>
                                                         </div>
-
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="" class="control-label">Foto</label>

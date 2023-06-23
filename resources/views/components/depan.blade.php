@@ -43,9 +43,7 @@
     {{-- Header --}}
     <x-layout.depan.header />
     {{-- end header --}}
-
     {{ $slot }}
-
     <!-- ======= Footer ======= -->
     <x-layout.depan.footer />
     <!-- End Footer -->

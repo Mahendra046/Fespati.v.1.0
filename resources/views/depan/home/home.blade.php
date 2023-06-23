@@ -18,7 +18,7 @@
                         <br>
                         <h4 class="text-light" data-aos="fade-up"><span><i>-UPGRADE YOUR PERFORMANCE-</i></span></h4>
                         <br>
-                        <a data-aos="fade-up" data-aos-delay="200" href="#get-started" style="" class="btn-get-started">Ayo
+                        <a data-aos="fade-up" data-aos-delay="200" href="{{url('kontak')}}" style="" class="btn-get-started">Ayo
                             Bergabung</a>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                             <div class="post-item position-relative h-100">
 
                                 <div class="post-img position-relative overflow-hidden">
-                                    <img src="{{ url("public/$berita->foto") }}" class="img-fluid" alt="">
+                                    <img src="{{ url("public/$berita->foto") }}" style="height:250px; width:500px; background-size: cover;" class="img-fluid" alt="">
                                     <span class="post-date">{{ $berita->created_at->format('d F Y') }}</span>
                                 </div>
 

@@ -33,6 +33,12 @@
                                     <i class="mdi mdi-account"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
+                                    @if (Auth::guard('ketua')->check())
+                                    <a href="{{url('ketua/profil')}}" class="dropdown-item">
+                                        <i class="icon-key"></i>
+                                        <span class="ml-2">Profil </span>
+                                    </a>
+                                    @endif
                                     <a href="{{url('logout')}}" class="dropdown-item">
                                         <i class="icon-key"></i>
                                         <span class="ml-2">Logout </span>

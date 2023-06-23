@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+Use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -11,17 +12,21 @@ class AuthController extends Controller
         return view('login');
     }
 
-    function loginProcess(){
-        if (Auth::guard('admin')->attempt(['email' => request('email'), 'password' => request('password')])) {
+    function loginProcess(Request $request){
+        $credentials = $request->only('email','password');
 
-            return redirect('admin/dashboard')->with('success', 'Login Berhasil');
-        }
-        return back()->with('danger', 'Login Gagal');
+        if (Auth::guard('admin')->attempt($credentials)) {
+            return redirect('admin/dashboard')->with('success','Selamat Datang AdminFes');
+
+        }else if(Auth::guard('ketua')->attempt($credentials)) {
+            return redirect('ketua/dashboard')->with('success','Login Berhasil');
+        } return back()->with('danger','Login Gagal');
     }
 
     function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
+        Auth::guard('ketua')->logout();
 
         $request->session()->invalidate();
 
